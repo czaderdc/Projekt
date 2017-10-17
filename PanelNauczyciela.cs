@@ -190,10 +190,5 @@ namespace DziennikElektroniczny
             db.SaveChanges();
             db.Dispose();
         }
-
-        private void button1_Click(object sender, EventArgs e)
-        {
-            KlasaPomocnicza.Wyloguj(sender);
-        }
     }
 }

@@ -37,7 +37,7 @@ namespace DziennikElektroniczny
 
             using (var db = new MojContext())
             {
-               // pictureBox1.Image = PobierzZdjecieBaza(db.Uczniowie.Where(u => u.UczenID == IdUcznia).Select(u => u.Zdjecie).Single());
+                pictureBox1.Image = PobierzZdjecieBaza(db.Uczniowie.Where(u => u.UczenID == IdUcznia).Select(u => u.Zdjecie).Single());
                 List<DataGridViewComboBoxColumn> comboKolumny = new List<DataGridViewComboBoxColumn>();
                 
                 var uczen = db.Uczniowie.Where(u => u.LogowanieID == IdUcznia).Include(u=> u.Oceny.Select(o=>o.Przedmiot)).Single();
@@ -81,11 +81,6 @@ namespace DziennikElektroniczny
         private void pictureBox1_Click(object sender, EventArgs e)
         {
 
-        }
-
-        private void button2_Click(object sender, EventArgs e)
-        {
-            KlasaPomocnicza.Wyloguj(sender);
         }
     }
 }

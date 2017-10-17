@@ -87,8 +87,7 @@ namespace DziennikElektroniczny
         {
             
                
-                DodawanieUcznia du = new DodawanieUcznia(nazwaSzkoly, this);
-            this.Hide();
+                DodawanieUcznia du = new DodawanieUcznia(nazwaSzkoly);
                 du.Show();
             
         }
