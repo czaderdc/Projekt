@@ -16,14 +16,12 @@ namespace DziennikElektroniczny
         private Uczen uczenDoDodania = new Uczen();
         private Szkola szkola;
         string nazwaszkoly;
-        public DodawanieUcznia(string nazwaSzkoly)
+        Form skadPrzybylem;
+        public DodawanieUcznia(string nazwaSzkoly, Form skad)
         {
             InitializeComponent();
-            if (!File.Exists(@"G:\loginyUcznia.txt"))
-            {
-                FileStream fs = File.Create(@"G:\loginyUcznia.txt");
-                fs.Close();
-            }
+            skadPrzybylem = skad;
+           
             ZarejestrujEventy(this);
             nazwaszkoly = nazwaSzkoly;
 
@@ -310,7 +308,7 @@ namespace DziennikElektroniczny
             loginTextBox.Text = daneLogowaniaUcznia.Login = GenerujLoginUcznia();
             hasloTextBox.Text = daneLogowaniaUcznia.Haslo = KlasaPomocnicza.GenerujHaslo(9);
             daneLogowaniaUcznia.Rola = "Uczen";
-            FileStream fs = new FileStream(@"G:\loginyUcznia.txt", FileMode.Append, FileAccess.Write);
+            FileStream fs = new FileStream(@"loginyUcznia.txt", FileMode.Append, FileAccess.Write);
             using (StreamWriter sw = new StreamWriter(fs))
             {
                 sw.WriteLine("Dane logowania Ucznia: " + uczenDoDodania.Imie + " " + uczenDoDodania.Nazwisko + ":");
@@ -389,6 +387,12 @@ namespace DziennikElektroniczny
                 db.Uczniowie.Add(uczenDoDodania);
                 db.SaveChanges();
             }
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            this.Close();
+            skadPrzybylem.Show();
         }
     }
 }

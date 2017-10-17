@@ -1,3 +1,10 @@
+C:\Users\konra\documents\visual studio 2017\Projects\ConsoleApp13\DziennikElektroniczny\bin\Release\DziennikElektroniczny.exe.config
+C:\Users\konra\documents\visual studio 2017\Projects\ConsoleApp13\DziennikElektroniczny\bin\Release\DziennikElektroniczny.exe
+C:\Users\konra\documents\visual studio 2017\Projects\ConsoleApp13\DziennikElektroniczny\bin\Release\DziennikElektroniczny.pdb
+C:\Users\konra\documents\visual studio 2017\Projects\ConsoleApp13\DziennikElektroniczny\bin\Release\EntityFramework.dll
+C:\Users\konra\documents\visual studio 2017\Projects\ConsoleApp13\DziennikElektroniczny\bin\Release\EntityFramework.SqlServer.dll
+C:\Users\konra\documents\visual studio 2017\Projects\ConsoleApp13\DziennikElektroniczny\bin\Release\EntityFramework.xml
+C:\Users\konra\documents\visual studio 2017\Projects\ConsoleApp13\DziennikElektroniczny\bin\Release\EntityFramework.SqlServer.xml
 C:\Users\konra\documents\visual studio 2017\Projects\ConsoleApp13\DziennikElektroniczny\obj\Release\DziennikElektroniczny.DodawanieKlasy.resources
 C:\Users\konra\documents\visual studio 2017\Projects\ConsoleApp13\DziennikElektroniczny\obj\Release\DziennikElektroniczny.DodawaniePrzedmiotu.resources
 C:\Users\konra\documents\visual studio 2017\Projects\ConsoleApp13\DziennikElektroniczny\obj\Release\DziennikElektroniczny.DodawanieSzkoly.resources
@@ -11,12 +18,5 @@ C:\Users\konra\documents\visual studio 2017\Projects\ConsoleApp13\DziennikElektr
 C:\Users\konra\documents\visual studio 2017\Projects\ConsoleApp13\DziennikElektroniczny\obj\Release\DziennikElektroniczny.Properties.Resources.resources
 C:\Users\konra\documents\visual studio 2017\Projects\ConsoleApp13\DziennikElektroniczny\obj\Release\DziennikElektroniczny.csproj.GenerateResource.Cache
 C:\Users\konra\documents\visual studio 2017\Projects\ConsoleApp13\DziennikElektroniczny\obj\Release\DziennikElektroniczny.csproj.CoreCompileInputs.cache
-C:\Users\konra\documents\visual studio 2017\Projects\ConsoleApp13\DziennikElektroniczny\bin\Release\DziennikElektroniczny.exe.config
-C:\Users\konra\documents\visual studio 2017\Projects\ConsoleApp13\DziennikElektroniczny\bin\Release\DziennikElektroniczny.exe
-C:\Users\konra\documents\visual studio 2017\Projects\ConsoleApp13\DziennikElektroniczny\bin\Release\DziennikElektroniczny.pdb
-C:\Users\konra\documents\visual studio 2017\Projects\ConsoleApp13\DziennikElektroniczny\bin\Release\EntityFramework.dll
-C:\Users\konra\documents\visual studio 2017\Projects\ConsoleApp13\DziennikElektroniczny\bin\Release\EntityFramework.SqlServer.dll
-C:\Users\konra\documents\visual studio 2017\Projects\ConsoleApp13\DziennikElektroniczny\bin\Release\EntityFramework.xml
-C:\Users\konra\documents\visual studio 2017\Projects\ConsoleApp13\DziennikElektroniczny\bin\Release\EntityFramework.SqlServer.xml
 C:\Users\konra\documents\visual studio 2017\Projects\ConsoleApp13\DziennikElektroniczny\obj\Release\DziennikElektroniczny.exe
 C:\Users\konra\documents\visual studio 2017\Projects\ConsoleApp13\DziennikElektroniczny\obj\Release\DziennikElektroniczny.pdb
