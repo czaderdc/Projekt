@@ -38,12 +38,10 @@
             this.KlasacomboBox = new System.Windows.Forms.ComboBox();
             this.label5 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
-            this.kodPocztowyTextBox = new System.Windows.Forms.TextBox();
             this.miastoTextBox = new System.Windows.Forms.TextBox();
             this.ulicaTextBox = new System.Windows.Forms.TextBox();
             this.label10 = new System.Windows.Forms.Label();
             this.label11 = new System.Windows.Forms.Label();
-            this.label12 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
             this.zapisanyNaListBox = new System.Windows.Forms.ListBox();
             this.powiadomienieLabel = new System.Windows.Forms.Label();
@@ -152,13 +150,6 @@
             this.label7.TabIndex = 13;
             this.label7.Text = "Adres";
             // 
-            // kodPocztowyTextBox
-            // 
-            this.kodPocztowyTextBox.Location = new System.Drawing.Point(844, 291);
-            this.kodPocztowyTextBox.Name = "kodPocztowyTextBox";
-            this.kodPocztowyTextBox.Size = new System.Drawing.Size(100, 20);
-            this.kodPocztowyTextBox.TabIndex = 14;
-            // 
             // miastoTextBox
             // 
             this.miastoTextBox.Location = new System.Drawing.Point(844, 177);
@@ -191,15 +182,6 @@
             this.label11.Size = new System.Drawing.Size(31, 13);
             this.label11.TabIndex = 21;
             this.label11.Text = "Ulica";
-            // 
-            // label12
-            // 
-            this.label12.AutoSize = true;
-            this.label12.Location = new System.Drawing.Point(847, 264);
-            this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(75, 13);
-            this.label12.TabIndex = 23;
-            this.label12.Text = "Kod Pocztowy";
             // 
             // label8
             // 
@@ -339,6 +321,7 @@
             // 
             // zapiszNaPrzedmiotyButton
             // 
+            this.zapiszNaPrzedmiotyButton.Enabled = false;
             this.zapiszNaPrzedmiotyButton.Location = new System.Drawing.Point(394, 492);
             this.zapiszNaPrzedmiotyButton.Name = "zapiszNaPrzedmiotyButton";
             this.zapiszNaPrzedmiotyButton.Size = new System.Drawing.Size(186, 23);
@@ -350,11 +333,11 @@
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(342, 189);
+            this.label6.Location = new System.Drawing.Point(289, 184);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(58, 13);
+            this.label6.Size = new System.Drawing.Size(152, 13);
             this.label6.TabIndex = 10;
-            this.label6.Text = "Przedmioty";
+            this.label6.Text = "Przedmioty nauczane w szkole";
             // 
             // przedmiotyICollectionBox
             // 
@@ -398,12 +381,10 @@
             this.Controls.Add(this.zapiszNaPrzedmiotyButton);
             this.Controls.Add(this.label8);
             this.Controls.Add(this.zapisanyNaListBox);
-            this.Controls.Add(this.label12);
             this.Controls.Add(this.label11);
             this.Controls.Add(this.label10);
             this.Controls.Add(this.ulicaTextBox);
             this.Controls.Add(this.miastoTextBox);
-            this.Controls.Add(this.kodPocztowyTextBox);
             this.Controls.Add(this.label7);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.przedmiotyICollectionBox);
@@ -439,12 +420,10 @@
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Button dodajNauczyciela;
         private System.Windows.Forms.Label label7;
-        private System.Windows.Forms.TextBox kodPocztowyTextBox;
         private System.Windows.Forms.TextBox miastoTextBox;
         private System.Windows.Forms.TextBox ulicaTextBox;
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.Label label11;
-        private System.Windows.Forms.Label label12;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.ListBox zapisanyNaListBox;
         private System.Windows.Forms.Label powiadomienieLabel;

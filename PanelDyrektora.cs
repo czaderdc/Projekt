@@ -47,8 +47,12 @@ namespace DziennikElektroniczny
         {
             if(e.ColumnIndex == dataGridView1.Columns[2].Index && e.RowIndex >=0)
             {
-                DodawaniePrzedmiotu du = new DodawaniePrzedmiotu(idDyrektora,this, nazwaSzkoly);//trzeba bedzie stworzy nowa forme
-                du.Show();
+                
+                    int idNauczyciela = Int32.Parse(dataGridView1.Rows[e.RowIndex].Cells[3].Value.ToString());
+                    DodajNauczycielowiPrzedmioty dnp = new DodajNauczycielowiPrzedmioty(idNauczyciela, idDyrektora, nazwaSzkoly, this);//trzeba bedzie stworzy nowa forme
+                this.Hide();
+                    dnp.Show();
+                
             }
         }
 
@@ -87,9 +91,11 @@ namespace DziennikElektroniczny
 
         private void ZarejestrujEventy()
         {
+           
             this.Load += (s, e) =>
             {
-                CzySzkolaMaPrzypisanePrzedmioty();
+               
+                WysweitlNauczycieli();
             };
             dataGridView1.CellClick += DataGridView1_CellClick;
         }
@@ -124,6 +130,7 @@ namespace DziennikElektroniczny
         {
             using (var db = new MojContext())
             {
+                dataGridView1.DataSource = null;
                 //mogę porównywać prymitywne nazwa w zapytaniu entity ale nie moge uzywac extensino methods....
                 var Nauczyciele = db.ListaSzkol.Where(s => s.NazwaSzkoly == nazwaSzkoly).Include(s => s.Przedmioty).Select(s => s.ListaNauczycieli.ToList()).Single();
 
@@ -133,7 +140,8 @@ namespace DziennikElektroniczny
                               {
                                   Nauczyciel = N,
                                   ImięNauczyciela = N.Imie,
-                                  NauczanyPrzedmiot = N.Przedmioty
+                                  NauczanyPrzedmiot = N.Przedmioty,
+                                  IDNauczyciela = N.NauczycielID
                               }).ToList();
                 if (result.Count() == 0)
                 {
@@ -151,6 +159,8 @@ namespace DziennikElektroniczny
                     dataGridView1.Columns.Add(bc);
                     bc.HeaderText = "Dodaj przedmiot";
                     dataGridView1.Columns[2].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
+                    dataGridView1.Columns.Add("NauczycielIDDEBUG", "IDNAUCZYCIELADEBUG");
+                 //   dataGridView1.Columns[3].Visible = false;
                     dataGridView1.AutoResizeRows();
                     for (int i = 0; i < result.Count; i++)
                     {
@@ -164,6 +174,7 @@ namespace DziennikElektroniczny
                         dataGridView1.Rows[rowIndex].Cells[0].Value = result[i].ImięNauczyciela;
                         var buttonCell = (DataGridViewButtonCell)dataGridView1.Rows[rowIndex].Cells[2];
                         buttonCell.Value = "Zapisz na nowy przedmiot";
+                        dataGridView1.Rows[rowIndex].Cells[3].Value = result[i].IDNauczyciela;
                     }
                 }
 
@@ -185,6 +196,11 @@ namespace DziennikElektroniczny
         {
             DodawanieNauczyciela dn = new DodawanieNauczyciela(nazwaSzkoly);
             dn.Show();
+        }
+
+        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
         }
     }
 }

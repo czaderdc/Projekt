@@ -43,7 +43,9 @@ namespace DziennikElektroniczny
         {
             listaPrzedmiotowListBox.Items.Clear();
             ListBox lb = sender as ListBox;
-            string NazwaKlasy = lb.SelectedItem.ToString();
+            string NazwaKlasy = "";
+            if (lb.SelectedItem!=null)
+             NazwaKlasy = lb.SelectedItem.ToString();
             using (var db = new MojContext())
             {
                 var przedmioty = db.Klasy.Where(k => k.Szkola.NazwaSzkoly == NazwaSzkoly && k.NazwaKlasy == NazwaKlasy).Select(k => k.PrzedmiotyKlasy).Single();

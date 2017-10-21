@@ -19,5 +19,6 @@ namespace WindowsFormsApp1
         public Szkola Szkola { get; set; }
         public ICollection<Przedmiot> PrzedmiotyKlasy { get; set; } = new HashSet<Przedmiot>();
         public ICollection<Uczen> Uczniowie { get; set; } = new HashSet<Uczen>();
+        public int MyProperty { get; set; }
     }
 }

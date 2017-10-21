@@ -9,5 +9,6 @@ namespace DziennikElektroniczny.CodeFirstDziennikModel
     public class Ostrzezenie
     {
         public string Login { get; set; }
+        public int MyProperty { get; set; }
     }
 }

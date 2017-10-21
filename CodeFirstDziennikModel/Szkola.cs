@@ -24,5 +24,6 @@ namespace WindowsFormsApp1
         public virtual ICollection<Klasa> ListaKlas { get; set; } = new HashSet<Klasa>();
         public virtual ICollection<Nauczyciel> ListaNauczycieli { get; set; } = new HashSet<Nauczyciel>();
         public virtual ICollection<Przedmiot> Przedmioty { get; set; } = new HashSet<Przedmiot>();
-    }
+       }
+    
 }

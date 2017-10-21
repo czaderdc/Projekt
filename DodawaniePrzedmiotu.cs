@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Data.Entity;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -26,7 +27,7 @@ namespace DziennikElektroniczny
 
         private void ZarejestrujEventy()
         {
-            
+
 
 
 
@@ -53,8 +54,9 @@ namespace DziennikElektroniczny
             };
             nowyPrzedmiotTextBox.TextChanged += (s, e) =>
             {
+
                 TextBox t = s as TextBox;
-                if (t.Text.Length < 3 || t.Text.Any(c => !char.IsLetter(c) && !char.IsWhiteSpace(c)))
+                if (CzyPosiadaJuzTenPrzedmiot((s as TextBox).Text) || t.Text.Length < 3 || t.Text.Any(c => !char.IsLetter(c) && !char.IsWhiteSpace(c)))
                 {
                     dodajPrzedmiotButton.Enabled = false;
                 }
@@ -106,6 +108,7 @@ namespace DziennikElektroniczny
         private void DodawaniePrzedmiotu_Load(object sender, EventArgs e)
         {
             ZarejestrujEventy();
+            
             listaKlasListBox.Enabled = false;
             dodajPrzedmiotButton.Enabled = false;
             using (var db = new MojContext())
@@ -122,5 +125,28 @@ namespace DziennikElektroniczny
                 }
             }
         }
+
+        private bool CzyPosiadaJuzTenPrzedmiot(string nazwaPrzedmiotu)
+        {
+            using (var db = new MojContext())
+            {
+                var przedmioty = db.ListaSzkol.Where(sz => sz.NazwaSzkoly == nazwaSzkoly).Select(sz => sz.Przedmioty).Single();
+                var przedmiot = przedmioty.Where(p => p.NazwaPrzedmiotu.ToLower() == nazwaPrzedmiotu.ToLower()).SingleOrDefault();
+                if (przedmiot == null)
+                    return false;
+                else
+                {
+                    PowiadomUzytkownikaPowielenie();
+                    return true;
+                }
+            }
+        }
+
+        private void PowiadomUzytkownikaPowielenie()
+        {
+            MessageBox.Show("Ta szkoła ma już zapisany ten przedmiot!", "!!!", MessageBoxButtons.OK, MessageBoxIcon.Information);
+        }
+
+        
     }
 }

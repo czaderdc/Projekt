@@ -278,7 +278,7 @@
             // przedmiotyICollectionBox
             // 
             this.przedmiotyICollectionBox.FormattingEnabled = true;
-            this.przedmiotyICollectionBox.Location = new System.Drawing.Point(421, 163);
+            this.przedmiotyICollectionBox.Location = new System.Drawing.Point(411, 169);
             this.przedmiotyICollectionBox.Name = "przedmiotyICollectionBox";
             this.przedmiotyICollectionBox.Size = new System.Drawing.Size(164, 212);
             this.przedmiotyICollectionBox.TabIndex = 60;

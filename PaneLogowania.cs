@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Data.Entity;
 using System.Linq;
 using System.Windows.Forms;
 using WindowsFormsApp1;
@@ -10,6 +11,7 @@ namespace DziennikElektroniczny
     {
         public PaneLogowania()
         {
+           
             InitializeComponent();
             this.FormClosed += (s, e) =>
             {
