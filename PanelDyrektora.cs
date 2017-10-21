@@ -47,7 +47,7 @@ namespace DziennikElektroniczny
         {
             if(e.ColumnIndex == dataGridView1.Columns[2].Index && e.RowIndex >=0)
             {
-                DodawaniePrzedmiotu du = new DodawaniePrzedmiotu(idDyrektora);//trzeba bedzie stworzy nowa forme
+                DodawaniePrzedmiotu du = new DodawaniePrzedmiotu(idDyrektora,this, nazwaSzkoly);//trzeba bedzie stworzy nowa forme
                 du.Show();
             }
         }
@@ -61,10 +61,10 @@ namespace DziennikElektroniczny
                 if (query.Szkola.ListaKlas.Count > 0)//?? tabela szkoła powinna mieć osobno listę nauczanych przedmiotów??
                 {
                     dodajUczniaButton.Enabled = true;
-                    dodajNauczycielaButton.Enabled = true;
                 }
             }
         }
+
         private void PanelDyrektora_Load(object sender, EventArgs e)
         {
             ZarejestrujEventy();
@@ -72,15 +72,31 @@ namespace DziennikElektroniczny
             WyswietlInfo(idDyrektora);
         }
 
+        private void CzySzkolaMaPrzypisanePrzedmioty()
+        {
+            using (var db = new MojContext())
+            {
+                var przedmiotyCount = db.ListaSzkol.Where(sz => sz.NazwaSzkoly == nazwaSzkoly).Select(sz => sz.Przedmioty).FirstOrDefault();
+                if(przedmiotyCount!=null)
+                {
+                    dodajUczniaButton.Enabled = true;
+                }
+               
+            }
+        }
+
         private void ZarejestrujEventy()
         {
+            this.Load += (s, e) =>
+            {
+                CzySzkolaMaPrzypisanePrzedmioty();
+            };
             dataGridView1.CellClick += DataGridView1_CellClick;
         }
 
         private void WylaczButtony()
         {
             dodajUczniaButton.Enabled = false;
-            dodajNauczycielaButton.Enabled = false;
         }
 
         private void dodajUczniaButton_Click(object sender, EventArgs e)
@@ -161,7 +177,7 @@ namespace DziennikElektroniczny
 
         private void button1_Click(object sender, EventArgs e)
         {
-            DodawaniePrzedmiotu dp = new DodawaniePrzedmiotu(idDyrektora);
+            DodawaniePrzedmiotu dp = new DodawaniePrzedmiotu(idDyrektora, this, nazwaSzkoly);
             dp.Show();
         }
 

@@ -20,3 +20,4 @@ C:\Users\konra\documents\visual studio 2017\Projects\ConsoleApp13\DziennikElektr
 C:\Users\konra\documents\visual studio 2017\Projects\ConsoleApp13\DziennikElektroniczny\obj\Release\DziennikElektroniczny.csproj.CoreCompileInputs.cache
 C:\Users\konra\documents\visual studio 2017\Projects\ConsoleApp13\DziennikElektroniczny\obj\Release\DziennikElektroniczny.exe
 C:\Users\konra\documents\visual studio 2017\Projects\ConsoleApp13\DziennikElektroniczny\obj\Release\DziennikElektroniczny.pdb
+C:\Users\konra\documents\visual studio 2017\Projects\ConsoleApp13\DziennikElektroniczny\obj\Release\DziennikElektroniczny.csprojResolveAssemblyReference.cache

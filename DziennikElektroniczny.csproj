@@ -59,6 +59,7 @@
     <Compile Include="CodeFirstDziennikModel\Logowanie.cs" />
     <Compile Include="CodeFirstDziennikModel\MojContext.cs" />
     <Compile Include="CodeFirstDziennikModel\Nauczyciel.cs" />
+    <Compile Include="CodeFirstDziennikModel\Ostrzezenie.cs" />
     <Compile Include="CodeFirstDziennikModel\Przedmiot.cs" />
     <Compile Include="CodeFirstDziennikModel\Szkola.cs" />
     <Compile Include="CodeFirstDziennikModel\Uczen.cs" />

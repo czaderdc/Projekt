@@ -58,26 +58,9 @@ namespace DziennikElektroniczny
         {
             using (var db = new MojContext())
             {
-                string wybranaSzkola = comboBox1.SelectedItem.ToString();
-                var szkolaKlasy = db.ListaSzkol.Where(s => s.NazwaSzkoly == wybranaSzkola).Include(s => s.ListaKlas).Single();
-
-                List<Uczen> UczniowieSzkoly = new List<Uczen>();
-                foreach(Klasa k in szkolaKlasy.ListaKlas)
-                {
-                    foreach(Uczen u in k.Uczniowie)
-                    {
-                        UczniowieSzkoly.Add(u);
-                    }
-                }
-
-                var wynik = UczniowieSzkoly.Select(u => new
-                {
-                    ImięUcznia = u.Imie,
-                    NazwiskoUcznia = u.Nazwisko,
-                }).ToList();
-
+                var uczniowie = db.Uczniowie.ToList();
                 dataGridView1.DataSource = null;
-                dataGridView1.DataSource = wynik;
+                dataGridView1.DataSource = uczniowie;
             }
         }
 

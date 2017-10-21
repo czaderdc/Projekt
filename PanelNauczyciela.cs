@@ -60,6 +60,7 @@ namespace DziennikElektroniczny
                          {
                              ImięUcznia = u.Imie,
                              NazwiskoUcznia = u.Nazwisko,
+                             IDUcznia = u.UczenID
 
                          }).ToList();
 
@@ -73,7 +74,9 @@ namespace DziennikElektroniczny
                          dataGridView1.Columns[i].HeaderText = "Ocena" + (i + 1).ToString();
                      }
                      dataGridView1.Columns.Add("Imię", "Imię");
-
+                     dataGridView1.Columns.Add("Nazwisko", "Nazwisko");
+                     dataGridView1.Columns.Add("IDUCZNIADEBUG", "IDDEBUG");
+                     dataGridView1.Columns[7].Visible = false;
 
 
                      List<int> listaDostpOcen = new List<int> { 1, 2, 3, 4, 5, 6 };
@@ -93,6 +96,8 @@ namespace DziennikElektroniczny
                              }
                          }
                          dataGridView1.Rows[rowIndex].Cells[5].Value = bind[i].ImięUcznia;
+                         dataGridView1.Rows[rowIndex].Cells[6].Value = bind[i].NazwiskoUcznia;
+                         dataGridView1.Rows[rowIndex].Cells[7].Value = bind[i].IDUcznia;
 
                      }
 
@@ -101,19 +106,19 @@ namespace DziennikElektroniczny
                          int ik = 0;
                          foreach (Uczen u in Uczniowie)
                          {
-
-                             if (u.Imie == dataGridView1.Rows[ik].Cells["Imię"].Value.ToString())
+                         int tenUczen;
+                             if (u.UczenID == Int32.Parse(dataGridView1.Rows[ik].Cells[7].Value.ToString()))
                              {
-                                 var oceny = u.Oceny.Where(up => up.Uczen.Imie == dataGridView1.Rows[ik].Cells["Imię"].Value.ToString() && up.Przedmiot.NazwaPrzedmiotu == przedmiotComboBox.SelectedItem.ToString()).Select(up => up.Ocena).ToList();
+                                tenUczen = u.UczenID;
+                                 var oceny = u.Oceny.Where(up => up.UczenID == tenUczen && up.Przedmiot.NazwaPrzedmiotu == przedmiotComboBox.SelectedItem.ToString()).Select(up => up.Ocena).ToList();
 
                                
 
                                  for (int k = 0; k < oceny.Count; k++)
                                  {
-                                 if (k >=3)
-                                     continue;
-                                 dataGridView1.Rows[ik].Cells[k].Value = oceny[k].ToString();
-                             }
+                                 
+                                    dataGridView1.Rows[ik].Cells[k].Value = oceny[k].ToString();
+                                 }
 
                              }
                              ik++;
@@ -125,7 +130,7 @@ namespace DziennikElektroniczny
 
              };
 
-            //dataGridView1.CellValueChanged += DataGridView1_CellValueChanged;      
+               
         }
 
 
@@ -133,14 +138,14 @@ namespace DziennikElektroniczny
         {
             using (var db = new MojContext())
             {
-              //  if(dataGridView1.Rows[e.RowIndex].Cells[])
+             
             }
         }
 
         private void zapisOcenyButton_Click(object sender, EventArgs e)
         {
             var db = new MojContext();
-            // dataGridView1.Rows.Remove(dataGridView1.Rows[1]);
+            
             foreach (DataGridViewRow dr in dataGridView1.Rows)
             {
                 List<int> oceny = new List<int>();
@@ -155,17 +160,16 @@ namespace DziennikElektroniczny
                
                     
                     var listaPrzedmiotow = db.Nauczyciele.Where(n => n.LogowanieID == idNauczyciela).Select(n => n.Przedmioty).Single();
-                    var przedmiot = listaPrzedmiotow.Where(p => p.NazwaPrzedmiotu == przedmiotComboBox.SelectedItem.ToString()).Single();
-                    //var klasa = db.Uczniowie.Where(u => u.KlasaID == (db.Klasy.Where(k=> k.SzkolaID ==1 && k.NazwaKlasy== klasaComboBox.SelectedItem.ToString())).Select(k=>k.KlasaID).Single());
-                    var uczniowie = db.Uczniowie.ToList();
-                    //var uczen = uczniowie.Where(u=> u.UczenID == )
+                    var przedmiot = listaPrzedmiotow.Where(p => p.NazwaPrzedmiotu == przedmiotComboBox.SelectedItem.ToString()).Single();  
+              
 
-                  
+                int tenUczen;
                    
-                        if (dr.Cells["Imię"].Value != null)
+                        if (dr.Cells[7].Value != null)
                         {
-                            var uczen = uczniowie.Where(u => u.Imie == dr.Cells["Imię"].Value.ToString()).Single();
-                   
+                            tenUczen = Int32.Parse(dr.Cells[7].Value.ToString());
+                            var uczen = db.Uczniowie.Where(u => u.UczenID ==tenUczen).Single();
+                        
                             
                             for (int i = 0; i < oceny.Count; i++)
                             {
@@ -181,10 +185,7 @@ namespace DziennikElektroniczny
                         }
                     
 
-                    //if (dr.Index < 2)
-                    //    continue;
-                    
-                
+                   
              
             }
             db.SaveChanges();

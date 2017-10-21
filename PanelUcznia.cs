@@ -26,9 +26,10 @@ namespace DziennikElektroniczny
 
         private Image PobierzZdjecieBaza(byte[]zdjecie)
         {
-            MemoryStream ms = new MemoryStream(zdjecie);
-            Image fotka = Image.FromStream(ms);
-            return fotka;
+            using (MemoryStream ms = new MemoryStream(zdjecie))
+            {
+                return Image.FromStream(ms);
+            }
         }
 
         private void PanelUcznia_Load(object sender, EventArgs e)
@@ -37,7 +38,23 @@ namespace DziennikElektroniczny
 
             using (var db = new MojContext())
             {
-               // pictureBox1.Image = PobierzZdjecieBaza(db.Uczniowie.Where(u => u.UczenID == IdUcznia).Select(u => u.Zdjecie).Single());
+                try
+                {
+                    var fotka = db.Uczniowie.Where(u => u.LogowanieID == IdUcznia).Select(u => u.Zdjecie).Single();
+                    this.pictureBox1.Image = PobierzZdjecieBaza(fotka);
+                }
+                catch (ArgumentNullException ex)
+                {
+                    MessageBox.Show("Wyglada na to, że nie udało się załadować Twojego zdjęcia!", "UWAGA", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+                catch(InvalidOperationException ex)
+                {
+                    MessageBox.Show("Wyglada na to, że nie udało się załadować Twojego zdjęcia!", "UWAGA", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+               
+               // pictureBox1.
+               // pictureBox1.Visible = true;
+             
                 List<DataGridViewComboBoxColumn> comboKolumny = new List<DataGridViewComboBoxColumn>();
                 
                 var uczen = db.Uczniowie.Where(u => u.LogowanieID == IdUcznia).Include(u=> u.Oceny.Select(o=>o.Przedmiot)).Single();

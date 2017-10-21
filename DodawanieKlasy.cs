@@ -78,7 +78,7 @@ namespace DziennikElektroniczny
                 foreach(var b in butt)
                 {
                   
-                    if(b.Name == "dodajUczniaButton" || b.Name == "dodajNauczycielaButton")
+                    if(b.Name == "dodajUczniaButton")
                     {
                         b.Enabled = true;
                     }

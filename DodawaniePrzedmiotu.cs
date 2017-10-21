@@ -14,14 +14,22 @@ namespace DziennikElektroniczny
     public partial class DodawaniePrzedmiotu : Form
     {
         int id;
-        public DodawaniePrzedmiotu(int idDyrektora)
+        Form panelDyrektora;
+        string nazwaSzkoly;
+        public DodawaniePrzedmiotu(int idDyrektora, Form sender, string szkola)
         {
             InitializeComponent();
+            panelDyrektora = sender;
             id = idDyrektora;
+            nazwaSzkoly = szkola;
         }
 
         private void ZarejestrujEventy()
         {
+            
+
+
+
             nauczanePrzedmiotyListBox.SelectedValueChanged += (s, e) =>
             {
                 listaKlasListBox.Enabled = true;
@@ -38,7 +46,6 @@ namespace DziennikElektroniczny
                     {
                         var szkola = db.ListaSzkol.Where(sz => sz.Dyrektor.LogowanieID == id).Single();
                         var zapisanaKlasa = szkola.ListaKlas.Where(k => k.NazwaKlasy == klasa).Single();
-                        MessageBox.Show(zapisanaKlasa.NazwaKlasy);
                         zapisanaKlasa.PrzedmiotyKlasy.Add(szkola.Przedmioty.Where(p => p.NazwaPrzedmiotu == przedmiot).Single());
                         db.SaveChanges();
                     }
@@ -85,10 +92,13 @@ namespace DziennikElektroniczny
             nauczanePrzedmiotyListBox.Items.Add(nowyPrzedmiotTextBox.Text);
             using (var db = new MojContext())
             {
-                var szkola = db.ListaSzkol.Where(sz => sz.Dyrektor.LogowanieID == id).Single();
+                var szkola = db.ListaSzkol.Where(sz => sz.NazwaSzkoly == nazwaSzkoly).Single();
                 szkola.Przedmioty.Add(nowy);
                 db.SaveChanges();
             }
+           List<Button> buttons =  panelDyrektora.Controls.OfType<Button>().ToList();
+            var nazwaPrzycisku = buttons.Where(b => b.Name == "dodajNauczycielaButton").Select(b=>b).Single();
+            (nazwaPrzycisku as Button).Enabled = true;
             
            
         }
@@ -100,10 +110,12 @@ namespace DziennikElektroniczny
             dodajPrzedmiotButton.Enabled = false;
             using (var db = new MojContext())
             {
-                var szkola = db.Dyrektorzy.Where(d => d.LogowanieID == id).Select(d => d.Szkola.ListaKlas).Single();
-                var listaKlas = szkola.Select(s => s.NazwaKlasy).ToList();
-                listaKlasListBox.Items.AddRange(listaKlas.ToArray());
-                var przedmioty = db.ListaSzkol.Where(d => d.Dyrektor.LogowanieID == id).Select(sz => sz.Przedmioty).Single();
+                var listaKlas= db.ListaSzkol.Where(d => d.NazwaSzkoly
+                == nazwaSzkoly).Select(d => d.ListaKlas).Single();
+               
+                var bind = listaKlas.Select(k => k.NazwaKlasy).ToList();
+                listaKlasListBox.Items.AddRange(bind.ToArray());
+                var przedmioty = db.ListaSzkol.Where(sz => sz.NazwaSzkoly == nazwaSzkoly).Select(sz => sz.Przedmioty).Single();
                 foreach (Przedmiot p in przedmioty)
                 {
                     nauczanePrzedmiotyListBox.Items.Add(p.NazwaPrzedmiotu);

@@ -249,7 +249,7 @@ namespace DziennikElektroniczny
 
         private void DodawanieUcznia_Load(object sender, EventArgs e)
         {
-            // dodajUcznia.Enabled = false;
+             //dodajUcznia.Enabled = false;
             generowanieButton.Enabled = false;
             using (var db = new MojContext())
             {
@@ -331,36 +331,27 @@ namespace DziennikElektroniczny
                 string[] formatZdjecia = opd.FileName.Split('.');
                 pictureBox1.Image = Image.FromFile(opd.FileName);
                 pictureBox1.SizeMode = PictureBoxSizeMode.StretchImage;
-                uczenDoDodania.Zdjecie = PrzygotujZdjecieDoBazy(pictureBox1.Image, formatZdjecia[1]);
+                
             }
 
         }
 
-        private byte[] PrzygotujZdjecieDoBazy(Image zdjecie, string formatZdjecia)
+        private byte[] PrzygotujZdjecieDoBazy(Image zdjecie)
         {
-            MemoryStream mstream = new MemoryStream();
-            switch (formatZdjecia)
+            using (MemoryStream mstream = new MemoryStream())
             {
-                case "png":
-                zdjecie.Save(mstream, System.Drawing.Imaging.ImageFormat.Png);
-                    return mstream.ToArray();
-                    
-                case "jpg":
-                    zdjecie.Save(mstream, System.Drawing.Imaging.ImageFormat.Jpeg);
-                    return mstream.ToArray();
-                    
-                case "bmp":
-                    zdjecie.Save(mstream, System.Drawing.Imaging.ImageFormat.Bmp);
-                    return mstream.ToArray();
-                    
-                default:
-                    throw new Exception("Fd");
-
-
+                try
+                {
+                    zdjecie.Save(mstream, System.Drawing.Imaging.ImageFormat.Png);
+                }
+                catch(ArgumentNullException ex)
+                {
+                    MessageBox.Show("Musisz dodać zdjęcie!");
+                }
+                return mstream.ToArray();
             }
-            
 
-            
+
         }
         
     
@@ -374,6 +365,7 @@ namespace DziennikElektroniczny
         {
             using (var db = new MojContext())
             {
+                uczenDoDodania.Zdjecie =  PrzygotujZdjecieDoBazy(pictureBox1.Image);
                 uczenDoDodania.DataUrodzenia = DateTime.Now;
                 uczenDoDodania.AdresUcznia = new Adres
                 {
